@@ -1,0 +1,57 @@
+<div>
+    
+   
+    
+    <a [routerLink]="['/profile',report.owner.id]">
+    <table>
+        <tr>
+            <td>
+                reported
+            </td>
+            <td>
+                <img width="20%" src="{{report.owner.avatar}}">
+            </td>
+            <td>
+                 username : {{report.owner.username}}<br>
+            </td>
+            <td>
+                 last name : {{report.owner.firstname}}<br>
+            </td>
+            <td>
+                 username : {{report.owner.lastname}}<br>
+            </td>
+        </tr>
+    </table>
+</a>
+<a [routerLink]="['/profile',report.reporter.id]">
+    <table>
+        <tr>
+            <td>
+                reporter
+            </td>
+            <td>
+                <img width="20%" src="{{report.reporter.avatar}}">
+            </td>
+            <td>
+                 username : {{report.reporter.username}}<br>
+            </td>
+            <td>
+                 firstname : {{report.reporter.firstname}}<br>
+            </td>
+            <td>
+                 lastname : {{report.reporter.lastname}}<br>
+            </td>
+        </tr>
+    </table>
+</a>
+    
+    content : {{report.content}}<br>
+    created : {{report.createdAt}}<br>
+    updatedAt : {{report.updatedAt}}<br>
+    id : {{report.id}}<br>
+    Status : {{report.status}}<br>
+</div>
+<div *ngIf="report.status===1">
+    <button type="button" class="btn btn-success" (click)="acceptReport()">Accept</button>
+    <button type="button" class="btn btn-danger" (click)="closeReport()">Close</button>
+</div>

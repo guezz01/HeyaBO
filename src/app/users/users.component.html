@@ -1,0 +1,60 @@
+<table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+    <thead>
+      <tr>
+        <th class="th-sm">Id
+  
+        </th>
+        <th class="th-sm">CreatedAt
+  
+        </th>
+        <th class="th-sm">Username
+  
+        </th>
+        <th class="th-sm">Firstname
+  
+        </th>
+        <th class="th-sm">Email
+        
+        </th>
+        <th class="th-sm">phone
+  
+        </th>
+        <th class="th-sm">Role
+
+        </th>
+
+      <th class="th-sm">icon
+
+      </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of results?.items | paginate: { id: 'pagination1',itemsPerPage: itemsPerPage , currentPage: p, totalItems: totalItems }">
+        <td>
+            {{item.id}}
+        </td>
+        <td>
+            {{item.createdAt}}
+        </td>
+        <td>
+            {{item.username}}
+        </td>
+        <td>
+            {{item.firstname}}
+        </td>
+        <td>
+            {{item.email}}
+        </td>
+        <td>
+          {{item.phoneNumber}}
+      </td>
+        <td>
+            {{item.role}}
+        </td>
+        <td>
+          <a [routerLink]="['/profile',item.id]">icon</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <pagination-controls id="pagination1" (pageChange)="getPageUser(p = $event)"></pagination-controls>
