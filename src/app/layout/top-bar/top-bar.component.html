@@ -1,30 +1,21 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-
-        <button type="button" id="sidebarCollapse" class="navbar-btn">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fas fa-align-justify"></i>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Page</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Page</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Page</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" (click)="_authService.logoutUser()">Logout</a>
-                </li>
-            </ul>
+<nav class="navbar">
+    <ul class="nav-list">
+      <li routerLinkActive="active"><a [routerLink]="['/dashboard']">Dashboard</a></li>
+      <li routerLinkActive="active"><a [routerLink]="['/users']">Users</a></li>
+      <li routerLinkActive="active" class="dropdown">
+        <a [routerLink]="['/reports']" class="dropbtn">Reports</a>
+      </li>
+      <li routerLinkActive="active"><a [routerLink]="['/posts']">Posts</a></li>
+      <li routerLinkActive="active"><a [routerLink]="['/ratings']">Ratings</a></li>
+      <li routerLinkActive="active"><a [routerLink]="['/comments']">Comments</a></li>
+      <li class="avatar">
+        <a href="#">
+          <img src={{avatar}}>
+        </a>
+        <div class="submenu">
+          <a href="#" (click)="_authService.logoutUser()">Logout</a>
         </div>
-    </div>
-</nav>
+      </li>
+    </ul>
+  </nav>
+  

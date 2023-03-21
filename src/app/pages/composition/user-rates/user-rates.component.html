@@ -1,0 +1,48 @@
+
+<table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+    <thead>
+      <tr>
+        <th class="th-sm">Date
+  
+        </th>
+        <th class="th-sm">Rated
+  
+        </th>
+        <th class="th-sm">Rate
+  
+        </th>
+        <th class="th-sm">Content
+  
+        </th>
+        <th class="th-sm">Detail
+  
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of rates?.items | paginate: { id: 'ratingPagination',itemsPerPage: itemsPerPage , currentPage: p, totalItems: totalItems }" >
+        <td class="createdAt">
+            {{item.createdAt | date: 'dd-MM-yyyy' }}
+        </td>
+        <td class="pictures">
+            <div class="pictures">
+                <div class="profile-block" (click)="redirectTo('/profile/'+item.owner.id);">
+                  <img src="{{ item.owner.avatar }}" />
+                </div>
+              </div>
+          </td>
+        <td class="rate">
+            {{item.rate}}
+        </td>
+        <td>
+            <div class="content">
+                {{ item.content }}
+            </div> 
+        </td>
+        <td class="details">
+          <button (click)='openPopUp(item.id);'>detail</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <pagination-controls id="ratingPagination" (pageChange)="getPage(p = $event)"></pagination-controls>

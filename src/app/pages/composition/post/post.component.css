@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap');
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    height: 100%;
+}
+
+html,
+body {
+    height: 100%
+}
+
+body {
+    display: grid;
+    place-items: center;
+    font-family: 'Source Sans Pro', sans-serif;
+    background: #9C27B0
+}
+
+
+
+
+ .card {
+     position: relative;
+     display: flex;
+     padding:20px;
+     flex-direction: column;
+     min-width: 0;
+     word-wrap: break-word;
+     background-color: #fff;
+     background-clip: border-box;
+     border: 1px solid #d2d2dc;
+     border-radius: 11px;
+     -webkit-box-shadow: 0px 0px 5px 0px rgb(249, 249, 250);
+     -moz-box-shadow: 0px 0px 5px 0px rgba(212, 182, 212, 1);
+     box-shadow: 0px 0px 5px 0px rgb(161, 163, 164)
+ }
+
+.media img{
+      
+    width: 60px;
+    height: 60px;
+}
+
+
+.reply a {
+    
+    text-decoration: none;
+}
+.col-8 d-flex .date{
+    float: right;
+}
+.closeDiv {
+    position: relative;
+    }
+    
+    .closeDiv .closeButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    }
+#scrollable{
+    overflow-x: hidden;
+}
+#comment{
+    overflow-y: auto;
+}

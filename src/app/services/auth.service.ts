@@ -8,7 +8,7 @@ import { Login } from '../models/login.model';
 })
 export class AuthService {
 
-  private _loginUrl = "https://heyya-dev.herokuapp.com/auth/login";
+  private _loginUrl = "http://localhost:4000/auth/loginBO";
 
   constructor(private http: HttpClient,
               private _router: Router) { }
@@ -32,6 +32,18 @@ export class AuthService {
 
   getToken() {
     return localStorage.getItem('accessToken')
+  }
+
+  getId() {
+    return localStorage.getItem('id')
+  }
+
+  getAvatar() {
+    return localStorage.getItem('avatar')
+  }
+
+  getRole() {
+    return localStorage.getItem('role')
   }
 
   loggedIn() {

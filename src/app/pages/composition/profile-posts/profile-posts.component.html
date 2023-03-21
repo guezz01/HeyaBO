@@ -1,0 +1,69 @@
+<table
+  id="dtBasicExample"
+  class="table table-striped table-bordered table-sm"
+  cellspacing="0"
+  width="100%"
+>
+  <thead>
+    <tr>
+      <th class="th-sm">Id</th>
+      <th class="th-sm">CreatedAt</th>
+      <th class="th-sm">Content</th>
+      <th class="th-sm">Likes</th>
+      <th class="th-sm">Comments</th>
+      <th class="th-sm">Pictures</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="
+        let item of posts?.items
+          | paginate
+            : {
+                id: 'postPagination',
+                itemsPerPage: postsItemsPerPage,
+                currentPage: postsPage,
+                totalItems: postsTotalItems
+              }
+      "
+    >
+      <td class="id">
+        <div>
+          {{ item.id }}
+        </div>
+      </td>
+      <td class="createdAt">
+        <div>
+          {{ item.createdAt | date: "dd-MM-yyyy" }}
+        </div>
+      </td>
+      <td>
+        <div class="content">
+          {{ item.content }}
+        </div>
+      </td>
+      <td class="likes">
+        <div>
+          {{ item.likes }}
+        </div>
+      </td>
+      <td class="comments">
+        <div>
+          {{ item.comments }}
+        </div>
+      </td>
+      <td class="pictures">
+        <div class="pictures">
+            <div class="profile-block" *ngIf="item.medias?.length > 0" (click)="openPopUp(item.id)">
+              <img src="{{ item.medias[0].path }}" />
+              <div class="picture-count">{{ item.medias.length }}</div>
+            </div>
+          </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<pagination-controls
+  id="postPagination"
+  (pageChange)="getPage((postsPage = $event))"
+></pagination-controls>

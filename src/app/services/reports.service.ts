@@ -1,17 +1,19 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReportsService {
 
-  private baseUrl = "https://heyya-dev.herokuapp.com";
+  private baseUrl = "http://localhost:4000";
 
   constructor(private http: HttpClient,
     private _router: Router) { }
 
+    private _listeners = new Subject<any>();
 
     getAllReports(page:string,limit:string) {
       /* let headers = new HttpHeaders({
@@ -37,13 +39,28 @@ export class ReportsService {
       //return this.http.get(`${this.baseUrl}/get/${id}`);
     }
 
-    getUserReportByAdmin(id:string,limit:string){
+    getReportOfUser(id:string,page:string,limit:string) {
+      let headers = new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+     });
+     let _params = new HttpParams().set("page",page).set("limit", limit);
+     //console.log(this.baseUrl+"/get/"+id);
+     return this.http.patch<any>(this.baseUrl+"/report/accept/"+id,{ } ,{headers: headers, params: _params});
 
-      let headers = new HttpHeaders(); 
-     headers.append('Content-Type', 'application/json');
-     let _params = new HttpParams().set("limit", limit);
+     //return this.http.get<any>(`${this.baseUrl}/report/get/${id}`, { headers: headers });
+      //return this.http.get(`${this.baseUrl}/get/${id}`);
+    }
+
+    getUserReportByAdmin(id:string,page:string,limit:string){
+
+      let headers = new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+     });
+     let _params = new HttpParams().set("page",page).set("limit", limit);
      
-      return this.http.get<any>(this.baseUrl+"/report/last/reported/"+id, {headers: headers, params: _params});
+      return this.http.get<any>(this.baseUrl+"/report/last/report/"+id, {headers: headers, params: _params});
     }
 
     acceptReport(id:string){
@@ -88,5 +105,54 @@ export class ReportsService {
       () => {
           console.log("completed.");
       });
+    }
+
+    closeReportAsync(id:string){
+      let headers = new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+     });
+     return this.http.patch<any>(this.baseUrl+"/report/close/"+id,{ } ,{headers: headers});
+    }
+
+    listen(): Observable<any>{
+      return this._listeners.asObservable();
+    }
+    filter(filterBy:string){
+      this._listeners.next(filterBy);
+    }
+
+    getAverageTimeToTreatAReport(): Observable<any> {
+      let headers = new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+     });
+     return this.http.get<any>(this.baseUrl+"/report/average/treat/time", { headers: headers });
+    }
+
+    getSubmittedReportCountByDay(): Observable<any> {
+      let headers = new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+     });
+     return this.http.get<any>(this.baseUrl+"/report/submitted/by/day", { headers: headers });
+    }
+
+    getTreatedReportCountByDay(): Observable<any> {
+      let headers = new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+     });
+     return this.http.get<any>(this.baseUrl+"/report/treated/by/day", { headers: headers });
+    }
+
+    searchReportsByAdmin(data: string, role: string, page: string, limit: string): Observable<any> {
+      let headers = new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+     });
+     let _params = new HttpParams().set("page",page).set("limit", limit);
+      const searchData = { data, role};
+      return this.http.post<any>(this.baseUrl+"/report/search/admin", searchData,{headers: headers, params: _params});
     }
 }

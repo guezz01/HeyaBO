@@ -1,0 +1,76 @@
+/* Sidebar container */
+.sidebar {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    top: 0;
+    left: -200px;
+    background-color: #FFFFFF;
+    color: #000000;
+    z-index: 1;
+    overflow-x: hidden;
+    transition: 0.5s;
+  }
+  
+  /* Show the sidebar when the toggle button is clicked */
+  .sidebar.active {
+    left: 0;
+  }
+  
+  /* Sidebar toggle button */
+  .sidebar-toggle {
+    position: absolute;
+    top: 20px;
+    right: -20px;
+    cursor: pointer;
+  }
+  
+  /* Sidebar toggle button lines */
+  .sidebar-toggle span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    margin-bottom: 3px;
+    background-color: #000000;
+    transition: 0.5s;
+  }
+  
+  /* Rotate the first and the third line to make an X */
+  .sidebar-toggle span:first-child {
+    transform: rotate(45deg);
+    transform-origin: 10% 10%;
+  }
+  
+  .sidebar-toggle span:last-child {
+    transform: rotate(-45deg);
+    transform-origin: 10% 90%;
+  }
+  
+  /* Sidebar list */
+  .sidebar-list {
+    margin-top: 50px;
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  /* Sidebar list items */
+  .sidebar-list li {
+    padding: 10px;
+  }
+  
+  /* Sidebar list item links */
+  .sidebar-list li a {
+    color: #000000;
+    text-decoration: none;
+  }
+  
+  /* Dropdown menu */
+  .dropdown-content {
+    display: none;
+  }
+  
+  /* Show dropdown menu on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  

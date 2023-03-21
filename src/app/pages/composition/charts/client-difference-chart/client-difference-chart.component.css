@@ -1,0 +1,9 @@
+#myPieChart{
+    background: white;
+    min-height: 200px;
+    max-height: 200px;
+    min-width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

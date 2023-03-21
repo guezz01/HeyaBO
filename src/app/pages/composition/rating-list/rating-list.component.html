@@ -1,0 +1,50 @@
+<div class="row small-search">
+  <div class="col-md-6">
+      <input class="form-control form-control-sm" type="text" [(ngModel)]="searchTerm" placeholder="Search..." (ngModelChange)="searchReportsByAdmin('1')">
+  </div>
+  <div class="col-md-3">
+      <button class="btn btn-primary btn-sm" (click)="resetFilters()">Reset</button>
+  </div>
+</div>
+  <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+    <thead>
+      <tr>
+        <th class="th-sm">Id</th>
+        <th class="th-sm">CreatedAt</th>
+        <th class="th-sm">Content</th>
+        <th class="th-sm">Rater</th>
+        <th class="th-sm">Rated</th>
+        <th class="th-sm">Rate</th>
+        <th class="th-sm">Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of results?.items | paginate: { id: 'ratingPagination', itemsPerPage: itemsPerPage, currentPage: p, totalItems: totalItems }">
+        <td>{{ item.id }}</td>
+        <td>{{ item.createdAt | date: 'dd-MM-yyyy' }}</td>
+        <td>
+          <div class="phone">{{ item.content }}</div>
+        </td>
+        <td class="pictures">
+          <div class="pictures">
+              <div class="profile-block" (click)="redirectTo('/profile/'+item.rater.id);">
+                <img src="{{ item.rater?.avatar }}" />
+              </div>
+            </div>
+        </td>
+        <td class="pictures">
+          <div class="pictures">
+              <div class="profile-block" (click)="redirectTo('/profile/'+item.owner.id);">
+                <img src="{{ item.owner?.avatar }}" />
+              </div>
+            </div>
+        </td>
+        <td>{{ item.rate }}</td>
+        <td>
+          <button (click)='openPopUp(item.id);'>Show</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <pagination-controls id="ratingPagination" (pageChange)="searchReportsByAdmin(p = $event)"></pagination-controls>
+  

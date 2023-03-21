@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 export class ProfileService {
 
 
-  private baseUrl = "https://heyya-dev.herokuapp.com";
+  private baseUrl = "http://localhost:4000";
 
   constructor(private http: HttpClient,
     private _router: Router) { }
@@ -31,6 +31,23 @@ export class ProfileService {
      
       return this.http.get<any>(this.baseUrl+"/posts/user/"+id, {headers: headers, params: _params});
     }
+
+    getPostsById(id:string) {
+      /* let headers = new HttpHeaders({
+        'Content-Type': 'application/json'
+     });
+     let options = {
+        headers: headers
+     }; */
+     let headers = new HttpHeaders({ 
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+   });
+     
+      return this.http.get<any>(this.baseUrl+"/posts/user/"+id, {headers: headers});
+    }
+
+   
 
 
 }

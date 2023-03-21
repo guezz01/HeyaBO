@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-end mb-3">
+    <span class="close mr-3" (click)="dialog.closeAll()">&times;</span>
+  </div>
+  
+  <table class="table">
+    <tr>
+      <td colspan="2"><strong>Reporter:</strong></td>
+      <td colspan="2"><strong>Reported:</strong></td>
+    </tr>
+    <tr>
+      <td><img width="20%" src="{{report.reporter.avatar}}" (click)="redirectTo('/profile/'+report.reporter.id);"></td>
+      <td>
+        <strong>Username:</strong> {{report.reporter.username}}<br>
+        <strong>Firstname:</strong> {{report.reporter.firstname}}<br>
+        <strong>Lastname:</strong> {{report.reporter.lastname}}
+      </td>
+      <td><img width="20%" src="{{report.owner.avatar}}" (click)="redirectTo('/profile/'+report.owner.id);"></td>
+      <td>
+        <strong>Username:</strong> {{report.owner.username}}<br>
+        <strong>Firstname:</strong> {{report.owner.firstname}}<br>
+        <strong>Lastname:</strong> {{report.owner.lastname}}
+      </td>
+    </tr>
+  </table>
+  <table class="table report-table">
+    <tr>
+        <td colspan="2"><strong>Report Info:</strong></td>
+        <td colspan="2"><strong>Content:</strong></td>
+      </tr> 
+    <tr>
+      <td><strong>Created:</strong> {{report.createdAt | date: 'dd-MM-yyyy'}} <br><strong>Status:</strong> {{report.status == 1 ? "Pending" : report.status == 2 ? "Accepted" : "Closed"}}</td>
+      <td colspan="3"> {{report.content}}</td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        <div class="text-right" *ngIf="report.status===1">
+          <button type="button" class="btn btn-success mr-2 mb-2" (click)="acceptReport()">Accept</button>
+          <button type="button" class="btn btn-danger mb-2" (click)="closeReport()">Close</button>
+        </div>
+      </td>
+    </tr>
+  </table>

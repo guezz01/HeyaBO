@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-  private baseUrl = "https://heyya-dev.herokuapp.com/Users";
+  private baseUrl = "http://localhost:4000/Users";
 
   constructor(private http: HttpClient,
     private _router: Router) { }
@@ -68,11 +68,39 @@ export class UserService {
       return this.http.get(`${this.baseUrl}?title=${title}`);
     }
 
+    searchUserByAdmin(data: string, role: string, page: string, limit: string): Observable<any> {
+      let headers = new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+     });
+     let _params = new HttpParams().set("page",page).set("limit", limit);
+      const searchData = { data, role};
+      return this.http.post<any>(this.baseUrl+"/get/search/admin", searchData,{headers: headers, params: _params});
+    }
 
+    getUserCountByRole(): Observable<any> {
+      let headers = new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+     });
+     return this.http.get<any>(this.baseUrl+"/get/count/role", { headers: headers });
+    }
 
-
-
-
+    getClientAndProRegisterCountByDay(): Observable<any> {
+      let headers = new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+     });
+     return this.http.get<any>(this.baseUrl+"/get/registered/count", { headers: headers });
+    }
+    
+    getUsersLastLogin(): Observable<any> {
+      let headers = new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+     });
+     return this.http.get<any>(this.baseUrl+"/get/last/login", { headers: headers });
+    }
 
    /* getUser(id:string) {
        

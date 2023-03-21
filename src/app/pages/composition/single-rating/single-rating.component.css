@@ -1,0 +1,15 @@
+img{
+    width: 60px;
+    height: 60px;
+}
+.rating-table td:first-child {
+    width: 30%;
+  }
+  
+  .rating-table td:last-child {
+    width: 70%;
+  }
+
+  .table {
+    margin-top: -0.5rem;
+  }

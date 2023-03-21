@@ -1,0 +1,72 @@
+<div mat-dialog-actions class="closeDiv">
+    <button mat-dialog-close="close" class="closeButton">X</button>
+</div>
+<div class="grid-container">
+
+    <div class="grid-child purple" id="img-container">
+        <c-carousel *ngIf="slides !== undefined && slides !== null">
+            <c-carousel-indicators></c-carousel-indicators>
+            <c-carousel-inner>
+              <c-carousel-item *ngFor="let slide of slides">
+                <img
+                  [src]="slide.path"
+                  class="d-block w-100"
+                  loading="lazy" />
+              </c-carousel-item>
+            </c-carousel-inner>
+            <c-carousel-control [routerLink] caption="Previous" direction="prev"></c-carousel-control>
+            <c-carousel-control [routerLink] caption="Next" direction="next"></c-carousel-control>
+          </c-carousel>
+          
+    </div>
+
+    <div class="grid-child green" id="scrollable">
+        
+       
+			  
+            <div class="card">
+               <div class="row">
+                   <div class="col-md-12">
+                           {{post.content}}
+                    </div>
+                </div>
+            </div>
+                       <div class="row" id="comments">
+                           <div class="col-md-12">
+                               <div class="media mt-4" *ngFor="let item of comments.items">
+                                   <img class="mr-3 rounded-circle" alt="Bootstrap Media Preview" src="{{ item.user.avatar }}" />
+                                   <div class="media-body">
+                                       <div class="row">
+                                        <div class="col-8 d-flex">
+                                           <a (click)="redirectTo('/profile/'+item.user.id);"><h5>{{ item.user.firstname }} {{ item.user.lastname }}</h5></a>
+                                           
+                                        </div>
+                                        
+                                        <div class="col-4">
+                                        
+                                        <div class="pull-right reply">
+                                        
+                                       <span> {{ item.createdAt | date: 'dd-MM-yyyy' }}</span>
+                                        
+                                        </div>
+                                        
+                                        </div>
+                                       </div>		
+                                       
+                                       {{ item.content }}
+                                       
+                                   </div>
+                               </div>
+                               
+                               
+                               
+                               
+                              
+                               
+                           </div>
+                       </div>
+               
+           
+    </div>
+  
+</div>

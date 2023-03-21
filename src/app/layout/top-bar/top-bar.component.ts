@@ -8,9 +8,13 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class TopBarComponent implements OnInit {
 
+  avatar : string;
+  id: any;
   constructor(public _authService: AuthService) { }
 
   ngOnInit(): void {
+    this.avatar = this._authService.getAvatar();
+    this.id = this._authService.getId();
   }
 
 }

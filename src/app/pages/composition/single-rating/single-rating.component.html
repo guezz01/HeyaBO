@@ -1,0 +1,34 @@
+<div class="d-flex justify-content-end mb-3">
+    <span class="close mr-3" (click)="dialog.closeAll()">&times;</span>
+  </div>
+  
+  <table class="table">
+    <tr>
+      <td colspan="2"><strong>Rater:</strong></td>
+      <td colspan="2"><strong>Rated:</strong></td>
+    </tr>
+    <tr>
+      <td><img width="20%" src="{{rating.rater.avatar}}" (click)="redirectTo('/profile/'+rating.rater.id);"></td>
+      <td>
+        <strong>Username:</strong> {{rating.rater.username}}<br>
+        <strong>Firstname:</strong> {{rating.rater.firstname}}<br>
+        <strong>Lastname:</strong> {{rating.rater.lastname}}
+      </td>
+      <td><img width="20%" src="{{rating.owner.avatar}}" (click)="redirectTo('/profile/'+rating.owner.id);"></td>
+      <td>
+        <strong>Username:</strong> {{rating.owner.username}}<br>
+        <strong>Firstname:</strong> {{rating.owner.firstname}}<br>
+        <strong>Lastname:</strong> {{rating.owner.lastname}}
+      </td>
+    </tr>
+  </table>
+  <table class="table rating-table">
+    <tr>
+        <td colspan="2"><strong>Rating Info:</strong></td>
+        <td colspan="2"><strong>Content:</strong></td>
+      </tr> 
+    <tr>
+      <td><strong>Created:</strong> {{rating.createdAt | date: 'dd-MM-yyyy'}} <br><strong>Rate:</strong> {{rating.rate}}</td>
+      <td colspan="3"> {{rating.content}}</td>
+    </tr>
+  </table>

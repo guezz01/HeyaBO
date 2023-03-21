@@ -1,0 +1,39 @@
+<div class="cont">
+  <div class="left-side">
+    <div class="profile">
+      <div class="profile-image">
+        <img src="{{user.avatar}}" alt="Profile Image">
+      </div>
+      <div class="info">
+        <div class="username">{{user.username}}</div>
+        <div class="name">{{user.firstname}}</div>
+        <div class="name">{{user.lastname}}</div>
+        <div class="role">{{user.role == 2 ? "Client" : "Professional"}}</div>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="followers">Followers: <span>{{user.followers}}</span></div>
+      <div class="following">Following: <span>{{user.followings}}</span></div>
+      <div class="posts">Posts: <span>{{postsCount}}</span></div>
+      <div class="comments">Comments: <span>{{commentsCount}}</span></div>
+      <div class="ratings">Ratings: <span>{{ratingsCount}}</span></div>
+    </div>
+  </div>
+  <div class="right-side">
+    <div class="posts-row">
+      <app-profile-posts (postCountEvent)="postsCountData($event)"></app-profile-posts>
+    </div>
+    <div class="stats-row">
+      <div class="comments-col">
+        <app-profile-comments (commentCountEvent)="commentsCountData($event)"></app-profile-comments>
+      </div>
+      <div class="ratings-col">
+        <app-profile-reports></app-profile-reports>
+      </div>
+      <div class="reports-col">
+        <app-user-rates (ratingCountEvent)="ratingsCountData($event)"></app-user-rates>
+      </div>
+    </div>
+  </div>
+  
+</div>

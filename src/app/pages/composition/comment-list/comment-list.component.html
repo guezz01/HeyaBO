@@ -1,0 +1,64 @@
+<div class="row small-search">
+  <div class="col-md-6">
+      <input class="form-control form-control-sm" type="text" [(ngModel)]="searchTerm" placeholder="Search..." (ngModelChange)="searchCommentsByAdmin('1')">
+  </div>
+  <div class="col-md-3">
+      <button class="btn btn-primary btn-sm" (click)="resetFilters()">Reset</button>
+  </div>
+</div>
+
+  <table
+    id="dtBasicExample"
+    class="table table-striped table-bordered table-sm"
+    cellspacing="0"
+    width="100%"
+  >
+    <thead>
+      <tr>
+        <th class="th-sm">Id</th>
+        <th class="th-sm">Content</th>
+        <th class="th-sm">User</th>
+        <th class="th-sm">Post</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let item of comments?.items
+            | paginate
+              : {
+                  id: 'commentPagination',
+                  itemsPerPage: itemsPerPage,
+                  currentPage: postsPage,
+                  totalItems: totalItems
+                }
+        "
+      >
+        <td class="id">
+          <div>
+            {{ item.id }}
+          </div>
+        </td>
+        <td>
+          <div class="content">
+            {{ item.content }}
+          </div>
+        </td>
+        <td class="avatar">
+          <div class="avatar">
+              <div class="profile-block" (click)="redirectTo('/profile/'+item.user.id);">
+                <img id="avatar" src="{{ item.user?.avatar }}" />
+              </div>
+            </div>
+        </td>
+        <td>
+            <button (click)="openPopUp(item.post.id)">Show</button>
+          </td>
+      </tr>
+    </tbody>
+  </table>
+  <pagination-controls
+    id="commentPagination"
+    (pageChange)="searchCommentsByAdmin((postsPage = $event))"
+  ></pagination-controls>
+  

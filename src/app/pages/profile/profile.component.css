@@ -1,0 +1,111 @@
+.cont {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 100vh;
+  }
+  
+  .left-side {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: flex-start;
+  }
+  
+  .right-side {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .profile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  
+  .profile-image {
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .profile-image img {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start; /* Added */
+  }
+  
+  .username {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .name {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  
+  .role {
+    font-size: 14px;
+  }
+  
+  .stats {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-left: 10px;
+  }
+  
+  .stats div {
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+  
+  .stats div span {
+    font-weight: bold;
+  }
+  
+
+  .posts-row {
+    width: 90%;
+    height: 45%;
+    background-color: #eee;
+  }
+  
+  .stats-row {
+    width: 90%;
+    height: 45%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .comments-col,
+  .ratings-col,
+  .reports-col {
+    width: 33.3%;
+    height: 45%;
+    background-color: #ddd;
+    margin: 0 5px;
+  }
+  
