@@ -8,7 +8,7 @@ import { Observable, Subject } from 'rxjs';
 })
 export class ReportsService {
 
-  private baseUrl = "http://localhost:4000";
+  private baseUrl = "http://196.235.99.40:4000";
 
   constructor(private http: HttpClient,
     private _router: Router) { }
