@@ -8,7 +8,7 @@ import { Login } from '../models/login.model';
 })
 export class AuthService {
 
-  private _loginUrl = "http://196.235.99.40:4000/auth/loginBO";
+  private _loginUrl = "http://196.235.211.164:4000/auth/loginBO";
 
   constructor(private http: HttpClient,
               private _router: Router) { }

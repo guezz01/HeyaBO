@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-  private baseUrl = "http://196.235.99.40:4000/Users";
+  private baseUrl = "http://196.235.211.164:4000/Users";
 
   constructor(private http: HttpClient,
     private _router: Router) { }
@@ -102,6 +102,21 @@ export class UserService {
      return this.http.get<any>(this.baseUrl+"/get/last/login", { headers: headers });
     }
 
+    getValidateResetPassword(token:string,email:string) {
+      let headers = new HttpHeaders();
+      headers.append('Content-Type', 'application/json');
+      let _params = new HttpParams().set("token",token).set("email", email);
+       return this.http.get<any>(this.baseUrl+"/validate/reset/password", {headers: headers, params: _params});
+    }
+
+    resetPassword(password: string, confirmPassword: string, email: string): Observable<any> {
+      let headers = new HttpHeaders({ 
+        'Content-Type': 'application/json'
+     });
+     let _params = new HttpParams().set("email",email);
+      const searchData = { password, confirmPassword};
+      return this.http.patch<any>(this.baseUrl+"/reset/password", searchData,{headers: headers, params: _params});
+    }
    /* getUser(id:string) {
        
      let headers = new HttpHeaders();

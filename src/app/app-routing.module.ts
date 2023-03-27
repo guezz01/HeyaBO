@@ -15,6 +15,7 @@ import { PostsComponent } from './pages/posts/posts.component';
 import { RatingsComponent } from './pages/ratings/ratings.component';
 import { RatingTopProChartComponent } from './pages/composition/charts/rating-top-pro-chart/rating-top-pro-chart.component';
 import { CommentsComponent } from './pages/comments/comments.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const routes: Routes = [
   {path:'dashboard',canActivate: [AuthGuard],component:DashboardComponent},
@@ -30,6 +31,7 @@ const routes: Routes = [
   {path:'posts',canActivate: [AuthGuard],component:PostsComponent},
   {path:'ratings',canActivate: [AuthGuard],component:RatingsComponent},
   {path:'comments',canActivate: [AuthGuard],component:CommentsComponent},
+  {path:'reset-password',component:ResetPasswordComponent},
 ];
 
 @NgModule({

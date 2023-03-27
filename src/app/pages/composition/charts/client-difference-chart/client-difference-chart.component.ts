@@ -15,6 +15,9 @@ export class ClientDifferenceChartComponent implements OnInit {
 
   public chartData: ChartData ;
   public chartOptions: ChartOptions ;
+  adminCount : number;
+  clientCount : number;
+  professionalCount : number;
 
   constructor(public _authService: AuthService, private _userService:UserService) { }
 
@@ -26,6 +29,14 @@ export class ClientDifferenceChartComponent implements OnInit {
   loadPieChart(){
     const pieChart = document.getElementById('myPieChart') as HTMLCanvasElement;
   const ctxPieChart = pieChart.getContext('2d');
+  this.chartData = {
+    labels: ['Admins', 'Clients', 'Professionals'],
+    datasets: [{
+      data: [this.pieChartData[0]["count"], this.pieChartData[1]["count"], this.pieChartData[2]["count"]],
+      backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+      hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+    }]
+  };
   this.chartOptions= {
     responsive: true,
     plugins: {
@@ -53,19 +64,16 @@ export class ClientDifferenceChartComponent implements OnInit {
     .subscribe(
       data => {
         this.pieChartData= data;
-        this.chartData = {
-          labels: ['Admins', 'Clients', 'Professionals'],
-          datasets: [{
-            data: [this.pieChartData[0]["count"], this.pieChartData[1]["count"], this.pieChartData[2]["count"]],
-            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
-            hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
-          }]
-        };
+        
         
         this.loadPieChart();
       },
       err => console.log(err)
     )
+  }
+
+  treatData(){
+    
   }
 
 }

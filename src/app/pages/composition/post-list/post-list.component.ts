@@ -39,6 +39,7 @@ export class PostListComponent implements OnInit {
         this.posts = res;
         this.postsTotalItems = res.meta.totalItems;
         this.postsCount=this.postsTotalItems;
+        console.log(this.posts);
       },
       (err) => console.log(err)
     );

@@ -48,6 +48,7 @@ import { CommentUserActivityChartComponent } from './pages/composition/charts/co
 import { CommentListComponent } from './pages/composition/comment-list/comment-list.component';
 import { SingleRatingComponent } from './pages/composition/single-rating/single-rating.component';
 import { ActivityChartComponent } from './pages/composition/charts/activity-chart/activity-chart.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 
@@ -86,7 +87,8 @@ import { ActivityChartComponent } from './pages/composition/charts/activity-char
     CommentUserActivityChartComponent,
     CommentListComponent,
     SingleRatingComponent,
-    ActivityChartComponent
+    ActivityChartComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,
