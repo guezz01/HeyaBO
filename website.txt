@@ -1,1 +1,3 @@
 https://heyyabackoffice.000webhostapp.com/
+
+ng build --watch

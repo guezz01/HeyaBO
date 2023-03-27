@@ -29,7 +29,7 @@ export class ActivityChartComponent implements OnInit {
     const chartData = {
       datasets: [
         {
-          label: 'distinct user commenting per day',
+          label: 'Last logged in Users',
           data: this.resultData,
           backgroundColor: 'rgba(255, 0, 0, 0.5)',
           borderColor: 'rgba(255, 0, 0, 1)',
@@ -50,7 +50,7 @@ export class ActivityChartComponent implements OnInit {
               label: (context) => {
                 const label = context.dataset.label;
                 const value = context.raw;
-                return `${label}: ${value}`;
+                return `${label} count: ${value}`;
               }
             }
           }

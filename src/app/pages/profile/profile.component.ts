@@ -64,24 +64,6 @@ export class ProfileComponent implements OnInit {
   ) 
   }
 
-  openModal1() {
-    this.matDialog.open(SingleReportComponent, {
-      "width": '6000px',
-      "maxHeight": '90vh',
-      "data": "John",
-      "autoFocus": false
-    });
-  }
-
-  openModal2() {
-    this.matDialog.open(PostComponent, {
-      "width": '6000px',
-      "maxHeight": '90vh',
-      "data": "John",
-      "autoFocus": false
-    });
-  }
-
   postsCountData(data: string) {
     this.postsCount = data;
     console.log("parent "+this.postsCount);

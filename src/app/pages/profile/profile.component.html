@@ -16,7 +16,15 @@
       <div class="following">Following: <span>{{user.followings}}</span></div>
       <div class="posts">Posts: <span>{{postsCount}}</span></div>
       <div class="comments">Comments: <span>{{commentsCount}}</span></div>
-      <div class="ratings">Ratings: <span>{{ratingsCount}}</span></div>
+      <div *ngIf="user.role==2" class="ratings">Ratings: <span>{{ratingsCount}}</span></div>
+    </div>
+    <div *ngIf="user.role==3 && user.userProAddition" class="stats">
+      <div class="address">Address: <span>{{user.userProAddition.address}}</span></div>
+      <div class="city">City: <span>{{user.userProAddition.city}}</span></div>
+      <div class="country">Country: <span>{{user.userProAddition.country}}</span></div>
+      <div class="speciality">Speciality: <span>{{user.userProAddition.speciality}}</span></div>
+      <div class="phone">Phone N°: <span>{{user.phoneNumber}}</span></div>
+      <div class="avgRating">Average ratings: <span>{{user.avgRating}}</span></div>
     </div>
   </div>
   <div class="right-side">
