@@ -37,6 +37,18 @@
     align-items: center;
     margin-right: 10px;
     margin-bottom: 10px;
+    position: relative;
+  }
+
+  .banned-text {
+    position: absolute; /* Added */
+    top: 50%; /* Added */
+    left: 50%; /* Added */
+    transform: translate(-50%, -50%) rotate(-45deg); /* Added */
+    color: red;
+    font-weight: bold;
+    padding: 5px;
+    font-size: 40px;
   }
   
   .profile-image img {

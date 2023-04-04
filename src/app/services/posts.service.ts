@@ -8,7 +8,7 @@ import {HttpParams} from "@angular/common/http";
 })
 export class PostsService {
 
-  private baseUrl = "http://196.235.211.164:4000";
+  private baseUrl = "http://localhost:4000";
 
   constructor(private http: HttpClient,
     private _router: Router) { }

@@ -76,5 +76,27 @@ export class ProfileComponent implements OnInit {
   ratingsCountData(data: string) {
     this.ratingsCount = data;
   }
+
+  banUser(){
+    this._userService.banUser(this.id).subscribe(
+      res => {
+        console.log(res.status);
+        this.user.status = res.status;
+      },
+      err => console.log(err)
+    ) 
+    console.log("ban");
+  }
+
+  unBanUser(){
+    this._userService.unBanUser(this.id)
+  .subscribe(
+    res => {
+      console.log(res);
+      this.user.status = res.status;
+    },
+    err => console.log(err)
+  ) 
+  }
   
 }

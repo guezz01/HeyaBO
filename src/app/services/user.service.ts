@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-  private baseUrl = "http://196.235.211.164:4000/Users";
+  private baseUrl = "http://localhost:4000/Users";
 
   constructor(private http: HttpClient,
     private _router: Router) { }
@@ -114,8 +114,26 @@ export class UserService {
         'Content-Type': 'application/json'
      });
      let _params = new HttpParams().set("email",email);
-      const searchData = { password, confirmPassword};
-      return this.http.patch<any>(this.baseUrl+"/reset/password", searchData,{headers: headers, params: _params});
+      const compareData = { password, confirmPassword};
+      return this.http.patch<any>(this.baseUrl+"/reset/password", compareData,{headers: headers, params: _params});
+    }
+
+    banUser(id:string): Observable<any> {
+      let headers = new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+     });
+     console.log("before send ban req");
+     console.log(id);
+      return this.http.patch<any>(this.baseUrl+"/ban/"+id,{},{headers: headers});
+    }
+
+    unBanUser(id:string): Observable<any> {
+      let headers = new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+     });
+      return this.http.patch<any>(this.baseUrl+"/unban/"+id,{},{headers: headers});
     }
    /* getUser(id:string) {
        

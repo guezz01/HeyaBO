@@ -3,6 +3,7 @@
     <div class="profile">
       <div class="profile-image">
         <img src="{{user.avatar}}" alt="Profile Image">
+        <div *ngIf="user.status==3" class="banned-text">BANNED</div>
       </div>
       <div class="info">
         <div class="username">{{user.username}}</div>
@@ -25,6 +26,10 @@
       <div class="speciality">Speciality: <span>{{user.userProAddition.speciality}}</span></div>
       <div class="phone">Phone N°: <span>{{user.phoneNumber}}</span></div>
       <div class="avgRating">Average ratings: <span>{{user.avgRating}}</span></div>
+    </div>
+    <div class="stats">
+      <div><button *ngIf="user.status == '3'" type="button" class="btn btn-success mr-2 mb-2" (click)="unBanUser()">Unban</button></div>
+      <div><button *ngIf="user.status == '1'" type="button" class="btn btn-danger mb-2" (click)="banUser()">Ban</button></div>
     </div>
   </div>
   <div class="right-side">

@@ -2,6 +2,7 @@
     <div class="col-md-2">
       <select class="form-select" [(ngModel)]="selectedRole" (ngModelChange)="searchReportsByAdmin('1')">
         <option value="pending">Pending</option>
+        <option value="inTreatement">In Treatement</option>
         <option value="treated">Treated</option>
       </select>
     </div>
@@ -45,9 +46,11 @@
               </div>
             </div>
         </td>
-        <td>{{ item.status }}</td>
         <td>
-          <button (click)='openPopUp(item.id);'>Show</button>
+          {{item.status == 1 ? "Pending" : item.status == 2 ? "Treated" : item.status == 3 ? "Closed" : "In Treatement"}}
+        </td>
+        <td>
+          <button (click)='openPopUp(item);'>Show</button>
         </td>
       </tr>
     </tbody>

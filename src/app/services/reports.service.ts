@@ -8,7 +8,7 @@ import { Observable, Subject } from 'rxjs';
 })
 export class ReportsService {
 
-  private baseUrl = "http://196.235.211.164:4000";
+  private baseUrl = "http://localhost:4000";
 
   constructor(private http: HttpClient,
     private _router: Router) { }
@@ -63,7 +63,7 @@ export class ReportsService {
       return this.http.get<any>(this.baseUrl+"/report/last/report/"+id, {headers: headers, params: _params});
     }
 
-    acceptReport(id:string){
+    /*acceptReport(id:string){
       let headers = new HttpHeaders({ 
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
@@ -79,9 +79,9 @@ export class ReportsService {
       () => {
           console.log("completed.");
       });
-    }
+    }*/
 
-    acceptReportAsync(id:string){
+    acceptReportAsync(id:string): Observable<any>{
       let headers = new HttpHeaders({ 
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
@@ -89,7 +89,7 @@ export class ReportsService {
      return this.http.patch<any>(this.baseUrl+"/report/accept/"+id,{ } ,{headers: headers});
     }
 
-    closeReport(id:string){
+    /*closeReport(id:string){
       let headers = new HttpHeaders({ 
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
@@ -105,14 +105,15 @@ export class ReportsService {
       () => {
           console.log("completed.");
       });
-    }
+    }*/
 
-    closeReportAsync(id:string){
+    closeReportAsync(id:string, content:string): Observable<any>{
       let headers = new HttpHeaders({ 
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
      });
-     return this.http.patch<any>(this.baseUrl+"/report/close/"+id,{ } ,{headers: headers});
+     const contentData = {content};
+     return this.http.patch<any>(this.baseUrl+"/report/close/"+id,contentData ,{headers: headers});
     }
 
     listen(): Observable<any>{
@@ -155,4 +156,32 @@ export class ReportsService {
       const searchData = { data, role};
       return this.http.post<any>(this.baseUrl+"/report/search/admin", searchData,{headers: headers, params: _params});
     }
+
+    createInTreatementReport(content: string, id:string): Observable<any> {
+      let headers = new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+     });
+      const contentData = {content};
+      return this.http.post<any>(this.baseUrl+"/report/treatedReport/create/"+id, contentData,{headers: headers});
+    }
+
+    updateInTreatementReport(content: string, id:string): Observable<any> {
+      let headers = new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+     });
+      const contentData = {content};
+      return this.http.post<any>(this.baseUrl+"/report/treatedReport/update/"+id, contentData,{headers: headers});
+    }
+
+    finishReport(id:string, content:string): Observable<any>{
+      let headers = new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
+     });
+     const contentData = {content};
+     return this.http.patch<any>(this.baseUrl+"/report/finish/"+id,contentData ,{headers: headers});
+    }
+
 }

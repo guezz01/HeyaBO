@@ -27,10 +27,10 @@
                         </div> 
                     </td>
                     <td class="status">
-                        {{item.status == 1 ? "pending" : "treated"}}
+                      {{item.status == 1 ? "Pending" : item.status == 2 ? "Treated" : item.status == 3 ? "Closed" : "In Treatement"}}
                     </td>
                     <td class="details">
-                      <button (click)='openPopUp(item.id);'>detail</button>
+                      <button (click)='openPopUp(item);'>detail</button>
                     </td>
                   </tr>
                 </tbody>

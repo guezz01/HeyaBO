@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatTable } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { ReportsService } from 'src/app/services/reports.service';
@@ -20,8 +21,19 @@ export class ReportListComponent implements OnInit {
   searchTerm: string;
   role:string;
 
+  @ViewChild(MatTable,{static:true}) table: MatTable<any>;
   constructor(public _authService: AuthService, private _reportService:ReportsService, private matDialog:MatDialog, private router: Router) { }
 
+  
+  updateRowData(row_obj){
+    this.reports = this.reports.filter((value,key)=>{
+      if(value.id == row_obj.id){
+        value.status = row_obj.status;
+      }
+      return true;
+    });
+  }
+  
   ngOnInit(): void {
 
     this._reportService.searchReportsByAdmin("","","1",this.itemsPerPage)
@@ -35,12 +47,14 @@ export class ReportListComponent implements OnInit {
 
   }
 
-  openPopUp(id){
+  openPopUp(report){
 
-    this.matDialog.open(SingleReportComponent,{ width:'60%', height:'420px', closeOnNavigation: true,
-    data:{
-      id:id
-    }
+    const dialogRef = this.matDialog.open(SingleReportComponent,{ width:'60%', height:'550px', closeOnNavigation: true,
+    data:report
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+      this.updateRowData(result.data);
   });
   }
 
@@ -50,7 +64,7 @@ export class ReportListComponent implements OnInit {
   searchReportsByAdmin(page){
     if(this.selectedRole){
       console.log("role "+this.selectedRole)
-      this.role = this.selectedRole === "pending" ? "1" : "2"
+      this.role = this.selectedRole === "pending" ? "1" : this.selectedRole === "inTreatement" ? "4" : "2"
     }
     this._reportService.searchReportsByAdmin(this.searchTerm,this.role,page,this.itemsPerPage).subscribe((data: any) => {
       this.reports =  data;
@@ -77,5 +91,12 @@ export class ReportListComponent implements OnInit {
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
     this.router.navigate([uri]));
  }
+
+ updateReport(report) {
+  const index = this.reports.findIndex(r => r.id === report.id);
+  if (index >= 0) {
+    this.reports[index] = report;
+  }
+}
 
 }

@@ -12,6 +12,10 @@
   margin-left: -4rem;
 }
 
+.small-search .form-select {
+  width: 125px;
+}
+
 table {
     table-layout: fixed;
     width: 100%;

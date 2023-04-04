@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { ReportsService } from '../../../services/reports.service';
 import { ActivatedRoute } from '@angular/router';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { SingleReportComponent } from '../single-report/single-report.component';
+import { MatTable } from '@angular/material/table';
 
 @Component({
   selector: 'app-profile-reports',
@@ -18,7 +19,7 @@ export class ProfileReportsComponent implements OnInit {
   itemsPerPage = "3";
   totalItems: any;
 
-
+  @ViewChild(MatTable,{static:true}) table: MatTable<any>;
   constructor(public _authService: AuthService,
     private _reportsService: ReportsService,
     private route: ActivatedRoute,
@@ -47,12 +48,14 @@ export class ProfileReportsComponent implements OnInit {
     })
   }
 
-  openPopUp(id){
+  openPopUp(report){
 
-    this.matDialog.open(SingleReportComponent,{ width:'60%', height:'420px', closeOnNavigation: true,
-    data:{
-      id:id
-    }
+    const dialogRef = this.matDialog.open(SingleReportComponent,{ width:'60%', height:'550px', closeOnNavigation: true,
+    data:report
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+      this.updateRowData(result.data);
   });
   }
 
@@ -65,6 +68,15 @@ export class ProfileReportsComponent implements OnInit {
       },
       err => console.log(err)
     );
+  }
+
+  updateRowData(row_obj){
+    this.reports = this.reports.filter((value,key)=>{
+      if(value.id == row_obj.id){
+        value.status = row_obj.status;
+      }
+      return true;
+    });
   }
 
 }

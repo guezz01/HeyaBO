@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-end mb-3">
-    <span class="close mr-3" (click)="dialog.closeAll()">&times;</span>
+    <span class="close mr-3" (click)="doAction();">&times;</span>
   </div>
   
   <table class="table">
@@ -28,14 +28,30 @@
         <td colspan="2"><strong>Content:</strong></td>
       </tr> 
     <tr>
-      <td><strong>Created:</strong> {{report.createdAt | date: 'dd-MM-yyyy'}} <br><strong>Status:</strong> {{report.status == 1 ? "Pending" : report.status == 2 ? "Accepted" : "Closed"}}</td>
+      <td><strong>Created:</strong> {{report.createdAt | date: 'dd-MM-yyyy'}} <br><strong>Status:</strong> {{report.status == 1 ? "Pending" : report.status == 2 ? "Treated" : report.status == 3 ? "Closed" : "In Treatement"}}</td>
       <td colspan="3"> {{report.content}}</td>
+    </tr>
+    <tr *ngIf="report.status===4 || report.status===2">
+      <td>
+        <strong>Admin Comment:</strong>
+      </td>
+      <td colspan="3">
+        <div class="form-group">
+          <textarea *ngIf="report.status===4" class="form-control" id="admin-comment" rows="3" [(ngModel)]="adminComment"></textarea>
+          <div *ngIf="report.status===2">
+            {{report.treatedReport.content}}
+          </div>
+        </div>
+      </td>
     </tr>
     <tr>
       <td colspan="4">
         <div class="text-right" *ngIf="report.status===1">
           <button type="button" class="btn btn-success mr-2 mb-2" (click)="acceptReport()">Accept</button>
-          <button type="button" class="btn btn-danger mb-2" (click)="closeReport()">Close</button>
+          <button type="button" class="btn btn-danger mb-2" (click)="closeReport('')">Close</button>
+        </div>
+        <div class="text-right" *ngIf="report.status===4">
+          <button type="button" class="btn btn-success mr-2 mb-2" (click)="updateInTreatementReport()">Submit</button>
         </div>
       </td>
     </tr>
