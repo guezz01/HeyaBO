@@ -49,7 +49,11 @@ import { CommentListComponent } from './pages/composition/comment-list/comment-l
 import { SingleRatingComponent } from './pages/composition/single-rating/single-rating.component';
 import { ActivityChartComponent } from './pages/composition/charts/activity-chart/activity-chart.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-
+import { BanUserComponent } from './pages/composition/ban-user/ban-user.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -88,7 +92,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     CommentListComponent,
     SingleRatingComponent,
     ActivityChartComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    BanUserComponent
   ],
   imports: [
     BrowserModule,
@@ -102,6 +107,10 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     MatTableModule,
     MatPaginatorModule,
     MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule,
     BrowserAnimationsModule,
     SidebarModule.forRoot()
   ],

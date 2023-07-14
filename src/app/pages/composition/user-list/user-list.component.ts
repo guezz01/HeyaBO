@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -11,14 +12,14 @@ export class UserListComponent implements OnInit {
 
   results:any;
   p: number;
-  itemsPerPage = "6";
+  itemsPerPage = "5";
   totalItems: any;
   selectedRole: string;
   searchTerm: string;
   role:string;
 
 
-  constructor(public _authService: AuthService, private _userService:UserService) { }
+  constructor(public _authService: AuthService, private _userService:UserService,private router: Router) { }
 
   ngOnInit(): void {
 
@@ -58,6 +59,11 @@ export class UserListComponent implements OnInit {
       err => console.log(err)
     )
   }
+
+  redirectTo(uri:string){
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+    this.router.navigate([uri]));
+ }
 
   refresh(): void {
     window.location.reload();

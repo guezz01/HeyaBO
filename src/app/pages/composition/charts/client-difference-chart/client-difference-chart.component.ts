@@ -64,7 +64,7 @@ export class ClientDifferenceChartComponent implements OnInit {
     .subscribe(
       data => {
         this.pieChartData= data;
-        
+        console.log(data);
         
         this.loadPieChart();
       },

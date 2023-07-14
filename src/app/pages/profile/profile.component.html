@@ -29,7 +29,7 @@
     </div>
     <div class="stats">
       <div><button *ngIf="user.status == '3'" type="button" class="btn btn-success mr-2 mb-2" (click)="unBanUser()">Unban</button></div>
-      <div><button *ngIf="user.status == '1'" type="button" class="btn btn-danger mb-2" (click)="banUser()">Ban</button></div>
+      <div><button *ngIf="user.status == '1'" type="button" class="btn btn-danger mb-2" (click)="openPopUp(user);">Ban</button></div>
     </div>
   </div>
   <div class="right-side">

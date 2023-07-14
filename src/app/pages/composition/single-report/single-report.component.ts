@@ -36,18 +36,6 @@ export class SingleReportComponent implements OnInit {
 
   }
 
-  loadReport(id){
-
-    this._reportService.getReport(id)
-    .subscribe(
-      res => {
-        this.report= res;
-      },
-      err => console.log(err)
-    ) 
-
-  }
-
   updateInTreatementReport(){
     console.log(this.adminComment);
     console.log("report id after = "+this.data.id);

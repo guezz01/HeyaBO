@@ -47,6 +47,7 @@ export class PostListComponent implements OnInit {
 
 
   searchPostsByAdmin(page){
+    this.postsPage = page;
     this._postsService.getPostsByAdmin(this.searchTerm,page,this.postsItemsPerPage).subscribe((data: any) => {
       this.posts =  data;
       this.postsTotalItems = data.meta.totalItems;
@@ -74,6 +75,7 @@ export class PostListComponent implements OnInit {
   .subscribe(
     res => {
       this.posts= res;
+      this.postsPage = 1;
       this.postsTotalItems = res.meta.totalItems;
     },
     err => console.log(err)

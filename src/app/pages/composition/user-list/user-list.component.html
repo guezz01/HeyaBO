@@ -22,7 +22,7 @@
         <th class="th-sm">Email</th>
         <th class="th-sm">Phone</th>
         <th class="th-sm">Role</th>
-        <th class="th-sm">Icon</th>
+        <th class="th-sm">Avatar</th>
       </tr>
     </thead>
     <tbody>
@@ -36,8 +36,12 @@
           <div class="phone">{{ item.phoneNumber }}</div>
         </td>
         <td>{{ item.role }}</td>
-        <td>
-          <a [routerLink]="['/profile',item.id]">icon</a>
+        <td class="pictures">
+          <div class="pictures">
+              <div class="profile-block" (click)="redirectTo('/profile/'+item.id);">
+                <img src="{{ item.avatar }}" />
+              </div>
+            </div>
         </td>
       </tr>
     </tbody>

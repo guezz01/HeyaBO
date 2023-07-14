@@ -1,0 +1,25 @@
+img{
+    width: 60px;
+    height: 60px;
+}
+.report-table td:first-child {
+    width: 30%;
+  }
+  .report-table td:last-child {
+    width: 70%;
+  }
+
+  .close {
+    margin-top: -1rem;
+  }
+  .table {
+    margin-top: -0.5rem;
+  }
+  .workmethod{
+    margin-top: -0.75rem;
+    margin-bottom: -0.5rem;
+    font-size: 12px;
+  }
+  .hyperlinkref{
+    color: blue;
+  }

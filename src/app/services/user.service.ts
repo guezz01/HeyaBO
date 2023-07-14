@@ -118,14 +118,15 @@ export class UserService {
       return this.http.patch<any>(this.baseUrl+"/reset/password", compareData,{headers: headers, params: _params});
     }
 
-    banUser(id:string): Observable<any> {
+    banUser(reason: string,id: number,bannedUntil: Date): Observable<any> {
+      const data = { reason, bannedUntil};
       let headers = new HttpHeaders({ 
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
      });
      console.log("before send ban req");
      console.log(id);
-      return this.http.patch<any>(this.baseUrl+"/ban/"+id,{},{headers: headers});
+      return this.http.patch<any>(this.baseUrl+"/ban/"+id,data,{headers: headers});
     }
 
     unBanUser(id:string): Observable<any> {

@@ -1,7 +1,7 @@
 
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import {MatTableDataSource} from '@angular/material/table';
+import {MatTable, MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -11,6 +11,7 @@ import { ProfileService } from 'src/app/services/profile.service';
 import { ReportsService } from 'src/app/services/reports.service';
 import { SingleReportComponent } from '../composition/single-report/single-report.component';
 import { PostComponent } from '../composition/post/post.component';
+import { BanUserComponent } from '../composition/ban-user/ban-user.component';
 
 @Component({
   selector: 'app-profile',
@@ -37,10 +38,7 @@ export class ProfileComponent implements OnInit {
   isLoadingResults = true;
   isRateLimitReached = false;
   
-  @ViewChild('paginator') paginator!: MatPaginator;
-  
-
-
+  @ViewChild(MatTable,{static:true}) table: MatTable<any>;
   constructor(public _authService: AuthService, private _userService:UserService,
      private _profileService:ProfileService, private _reportService:ReportsService,
       private route : ActivatedRoute, private matDialog: MatDialog, public dialog:MatDialog) { 
@@ -77,7 +75,7 @@ export class ProfileComponent implements OnInit {
     this.ratingsCount = data;
   }
 
-  banUser(){
+  /*banUser(){
     this._userService.banUser(this.id).subscribe(
       res => {
         console.log(res.status);
@@ -86,7 +84,7 @@ export class ProfileComponent implements OnInit {
       err => console.log(err)
     ) 
     console.log("ban");
-  }
+  }*/
 
   unBanUser(){
     this._userService.unBanUser(this.id)
@@ -97,6 +95,22 @@ export class ProfileComponent implements OnInit {
     },
     err => console.log(err)
   ) 
+  }
+
+  updateData(obj){
+        this.user.status = obj.status;
+      return true;
+  }
+
+  openPopUp(user){
+
+    const dialogRef = this.matDialog.open(BanUserComponent,{ width:'60%', height:'450px', closeOnNavigation: true,
+    data:user
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+      this.updateData(result.data);
+  });
   }
   
 }

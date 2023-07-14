@@ -58,9 +58,6 @@ export class ReportListComponent implements OnInit {
   });
   }
 
-
-
-
   searchReportsByAdmin(page){
     if(this.selectedRole){
       console.log("role "+this.selectedRole)

@@ -1,0 +1,57 @@
+<div class="d-flex justify-content-end mb-3">
+    <span class="close mr-3" (click)="doAction();">&times;</span>
+  </div>
+  
+  <table class="table">
+    <tr>
+      <td colspan="4"><strong>User Info:</strong></td>
+    </tr>
+    <tr>
+        <td></td>
+      <td><img width="20%" src="{{user.avatar}}" (click)="redirectTo('/profile/'+user.id);"></td>
+      <td>
+        <strong>Username:</strong> {{user.username}}<br>
+        <strong>Firstname:</strong> {{user.firstname}}<br>
+        <strong>Lastname:</strong> {{user.lastname}}
+      </td>
+      <td></td>
+    </tr>
+  </table>
+  <table class="table report-table">
+    <tr *ngIf="user.status===1">
+      <td>
+        <strong>Ban Reason:</strong>
+      </td>
+      <td colspan="3">
+        <div class="form-group">
+          <textarea class="form-control" id="admin-comment" rows="1" [(ngModel)]="reason"></textarea>
+        </div>
+        <div class="workmethod">refer to the work method <a class="hyperlinkref" href="#" target="_blank">here</a></div>
+      </td>
+    </tr>
+    <tr *ngIf="user.status===1">
+        <td>
+          <strong>Ban Until:</strong>
+        </td>
+        <td colspan="3">
+            <mat-form-field>
+                <input (dateInput)="onDateChange($event)" matInput [matDatepicker]="picker" [min]="minDate" placeholder="Choose a date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+        </td>
+      </tr>
+    <tr *ngIf="user.status===3">
+        <td><strong>Status:</strong></td>
+        <td colspan="3">Banned</td>
+    </tr>
+    <tr *ngIf="user.status===1 && reason && bannedUntil">
+      <td colspan="4">
+        <div class="text-right">
+          <button type="button" class="btn btn-success mr-2 mb-2" (click)="banUser()">Submit</button>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  
